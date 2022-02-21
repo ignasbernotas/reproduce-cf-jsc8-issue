@@ -1,4 +1,12 @@
+import JSC8, { C8Client } from "jsc8";
+
 export async function handleRequest(request: Request, env: Bindings) {
+  const client: C8Client = JSC8({
+    url: "https://gdn.paas.macrometa.io",
+    token: env.MACROMETA_API_KEY,
+    fabricName: "_system"
+  });
+
   // Match route against pattern /:name/*action
   const url = new URL(request.url);
   const match = /\/(?<name>[^/]+)(?<action>.*)/.exec(url.pathname);
